@@ -1,7 +1,9 @@
 package com.gmail.nasimahmed28.main;
 
+import com.gmail.nasimahmed28.database.AccountService;
 import com.gmail.nasimahmed28.database.OpenAccountService;
 import com.gmail.nasimahmed28.database.SessionService;
+import com.gmail.nasimahmed28.model.Account;
 import com.gmail.nasimahmed28.model.AccountType;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -60,6 +62,10 @@ public class OpenAccountServlet extends HttpServlet
 
             if (OpenAccountService.saveAccountType(accountType, email) > 0)
             {
+                Account account = new Account();
+                account.setAccountID(10);
+                AccountService.setAccount(email, account);
+                
                 response.sendRedirect("dashboard-page.jsp");
             }
         } 

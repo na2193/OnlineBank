@@ -9,7 +9,7 @@ import com.gmail.nasimahmed28.model.UserProfile;
 
 public class UserProfileService 
 {	
-	public static void  saveUserProfile(UserProfile profile)
+	public static void saveUserProfile(UserProfile profile)
 	{
 		//int executedValue = 0;
 		try

@@ -1,5 +1,7 @@
 package com.gmail.nasimahmed28.model;
 
+import java.util.Random;
+
 public class Account 
 {
 	private int accountID, accountTypeID;
@@ -25,11 +27,20 @@ public class Account
 
 
 	public int getAccountID() {
-		return accountID;
+		return this.accountID;
 	}
 
-	public void setAccountID(int accountID) {
-		this.accountID = accountID;
+	public void setAccountID(int length) {
+		
+           int accountTypeID = 0;
+           Random random = new Random();
+           
+           for(int i = 0; i < length; i++)
+           {
+               accountTypeID += random.nextInt(10);
+           }
+           
+           this.accountTypeID = accountTypeID;
 	}
 
 	public String getEmailID() {
