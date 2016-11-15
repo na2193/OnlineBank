@@ -25,7 +25,6 @@ public class RegistrationActivationServlet extends HttpServlet
 
 		if(RegistrationService.validateUser(token) > 0)
 		{
-			//response.sendRedirect("set-profile.jsp");
 			response.sendRedirect("SetPassword"); 
 		}
 		else

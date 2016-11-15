@@ -15,20 +15,22 @@ import java.sql.PreparedStatement;
  */
 public class OpenAccountService
 {
-    public static int saveAccountType(AccountType account)
+
+    public static int saveAccountType(AccountType account, String email)
     {
-         int executeValue = 0;
+        int executeValue = 0;
         try
         {
             Connection conn = DBConnection.getConnection();
-
-            String query = "INSERT INTO accountType (accountTypeID, accountType, minimumBalance)"
-                    + "Values (?, ?, ?)";
+     
+            String query = "INSERT INTO accountType (accountTypeID, accountType, minimumBalance, email)"
+                    + "Values (?, ?, ?, ?)";
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setInt(1, account.getAccountTypeID());
             stmt.setString(2, account.getAccountType());
             stmt.setDouble(3, account.getMinBalance());
-            
+            stmt.setString(4, email);
+
             executeValue = stmt.executeUpdate();
         } catch (Exception e)
         {

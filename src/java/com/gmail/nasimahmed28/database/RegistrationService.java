@@ -101,10 +101,10 @@ public class RegistrationService
         try
         {
             Connection conn = DBConnection.getConnection();
-            String selectQuery = "SELECT * FROM Registration WHERE token= '"+token+"' ";
+            String selectQuery = "SELECT * FROM Registration WHERE token=?";
 
             PreparedStatement stmt = conn.prepareStatement(selectQuery);
-            //stmt.setString(1, token);
+            stmt.setString(1, token);
             ResultSet rs = stmt.executeQuery(selectQuery);
 
             rs.next();

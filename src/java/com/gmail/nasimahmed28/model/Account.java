@@ -2,15 +2,16 @@ package com.gmail.nasimahmed28.model;
 
 public class Account 
 {
-	private int accountID, emailID, accountTypeID;
+	private int accountID, accountTypeID;
 	private String openDate, closeDate, Status;
+        private String emailID;
 	
 	public Account()
 	{
 		
 	}
 	
-	public Account(int accountID, int emailID, int accountTypeID,
+	public Account(int accountID, String emailID, int accountTypeID,
 			String openDate, String closeDate, String status) {
 		super();
 		this.accountID = accountID;
@@ -31,11 +32,11 @@ public class Account
 		this.accountID = accountID;
 	}
 
-	public int getEmailID() {
+	public String getEmailID() {
 		return emailID;
 	}
 
-	public void setEmailID(int emailID) {
+	public void setEmailID(String emailID) {
 		this.emailID = emailID;
 	}
 

@@ -10,19 +10,14 @@
     
     
     <a href="set-profile.jsp">User Profile</a>
-    
-    <!--
-	<form name="UserProfile" action="set-profile.jsp" method="get">
-		<input type="submit" name="userProfile" value="User Profile">
-	</form> -->
-    
     <br/>
     <a href="openaccount-page.jsp">Open Account</a>
-	
-    <!--
-	<form name="OpenAccount" action="openaccount-page.jsp" method="get">
-		<input type="submit" name="openAccount" value="Open Account">
-	</form> -->
+    <br/>
+    <a href="transfer-page.jsp">Transfer Between Personal Account</a>
+    <br/>
+    <a href="transfer-outside-page.jsp">Transfer Out Of Account</a>
+    <br/>
+    <a href="close-account.jsp">Close Account</a>
 </body>
 </html>
 	

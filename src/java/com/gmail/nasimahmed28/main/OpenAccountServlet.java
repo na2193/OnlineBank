@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/OpenAccountServlet")
 public class OpenAccountServlet extends HttpServlet
@@ -18,42 +19,53 @@ public class OpenAccountServlet extends HttpServlet
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        SessionService.validateSession(request, response);
+        // SessionService.validateSession(request, response);
     }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         // processRequest(request, response);
-         //response.sendRedirect("openaccount-page.jsp");
+        //response.sendRedirect("openaccount-page.jsp");
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        AccountType accountType = new AccountType();
-        String getAccountType = request.getParameter("accountType");
-        String minBalance = request.getParameter("minDeposit");
+        HttpSession session = request.getSession();
+        String email = (String) session.getAttribute("email");
 
-        if (getAccountType.equals("Checking Account"))
+        if (email != null)
         {
-            accountType.setAccountType("Checking");
-            accountType.setMinBalance(250.0);
-            accountType.setAccountTypeID(10);
-        } else if (getAccountType.equals("Saving Account"))
-        {
-            accountType.setAccountType("Saving");
-            accountType.setMinBalance(100);
-            accountType.setAccountTypeID(10);
-        } else if (getAccountType.equals("Credit Card"))
-        {
-            accountType.setAccountType("Credit Card");
-            accountType.setMinBalance(500);
-            accountType.setAccountTypeID(10);
-        }
+            AccountType accountType = new AccountType();
+            String getAccountType = request.getParameter("accountType");
+            String minBalance = request.getParameter("minDeposit");
 
-        if (OpenAccountService.saveAccountType(accountType) > 0)
+            if (getAccountType.equals("Checking Account"))
+            {
+                accountType.setAccountType("Checking");
+                accountType.setMinBalance(250.0);
+                accountType.setAccountTypeID(10);
+            } else if (getAccountType.equals("Saving Account"))
+            {
+                accountType.setAccountType("Saving");
+                accountType.setMinBalance(100);
+                accountType.setAccountTypeID(10);
+            } else if (getAccountType.equals("Credit Card"))
+            {
+                accountType.setAccountType("Credit Card");
+                accountType.setMinBalance(500);
+                accountType.setAccountTypeID(10);
+            }
+
+            if (OpenAccountService.saveAccountType(accountType, email) > 0)
+            {
+                response.sendRedirect("dashboard-page.jsp");
+            }
+        } 
+        else
         {
-            response.sendRedirect("dashboard-page.jsp");
+            response.sendRedirect("Login");
         }
     }
 }
