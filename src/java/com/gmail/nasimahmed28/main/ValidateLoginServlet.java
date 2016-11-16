@@ -11,44 +11,48 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.gmail.nasimahmed28.database.RegistrationService;
+import com.gmail.nasimahmed28.database.SessionService;
 
 @WebServlet("/Login")
-public class ValidateLoginServlet extends HttpServlet 
+public class ValidateLoginServlet extends HttpServlet
 {
-	private static final long serialVersionUID = 1L;
-       
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-	{
-		RequestDispatcher dispatcher = request.getRequestDispatcher("login-page.jsp");
-                dispatcher.forward(request, response);	
-	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-	{
-		HttpSession session;
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
-				
-		try
-		{
-			boolean validLogin = RegistrationService.validateLogin(username, password);
-			
-			if(validLogin)
-			{
-				session = request.getSession();
-				session.setAttribute("email", username);
-                                response.sendRedirect("DashboardPage"); 
-				
-			}
-			else
-			{
-				response.sendRedirect("Login");
-			}
-		}
-		catch(Exception e)
-		{
-			System.out.println(e);
-		}
-	}
+    private static final long serialVersionUID = 1L;
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        //SessionService.validateSession(request, response);
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("login-page.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        HttpSession session;
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+
+        try
+        {
+            boolean validLogin = RegistrationService.validateLogin(username, password);
+
+            if (validLogin)
+            {
+                session = request.getSession();
+                session.setAttribute("email", username);
+              //  RequestDispatcher dispatcher = request.getRequestDispatcher("DashboardPage");
+               // dispatcher.forward(request, response);
+                response.sendRedirect("DashboardPage"); 
+
+            } else
+            {
+                response.sendRedirect("Login");
+            }
+        } catch (Exception e)
+        {
+            System.out.println(e);
+        }
+    }
 
 }

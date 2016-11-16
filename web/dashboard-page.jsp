@@ -10,6 +10,7 @@
     
     
     <a href="set-profile.jsp">User Profile</a>
+  <!--  <a href="UserProfileServlet">User Profile</a> -->
     <br/>
     <a href="openaccount-page.jsp">Open Account</a>
     <br/>

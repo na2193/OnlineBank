@@ -20,7 +20,7 @@ public class UserProfileServlet extends HttpServlet
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        SessionService.validateSession(request, response);
+       // SessionService.validateSession(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
@@ -42,7 +42,7 @@ public class UserProfileServlet extends HttpServlet
         profile.setMaritalStatus(request.getParameter("maritalStatus"));
         profile.setJobddress(request.getParameter("jobAddress"));
 
-        UserProfileService.saveUserProfile(profile);
+       // UserProfileService.saveUserProfile(profile);
         
         /*
         if (UserProfileService.saveUserProfile(profile) > 0)

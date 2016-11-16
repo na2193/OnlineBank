@@ -11,8 +11,20 @@
 <body>
 	<form name="userProfile" action="UserProfileServlet" method="post">
                 <% 
+                    
                     String token = (String) session.getAttribute("token");
-                    Registration registration = RegistrationService.getRegistrationByToken(token);
+                     Registration registration;
+                    if(token != null)
+                    {
+                        registration = RegistrationService.getRegistrationByToken(token);
+                        
+                    }
+                    else
+                    {
+                        String email = (String) session.getAttribute("email");
+                        registration = RegistrationService.getRegistrationByEmail(email);
+                    }
+                    
                   %>
 		First Name: <input type="text" name="firstname" value="<%=registration.getFirstName()%>" required> <br/>
 		Last Name: <input type="text" name="lastname" value="<%= registration.getLastName()%>" required> <br/>

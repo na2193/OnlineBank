@@ -125,6 +125,46 @@ public class RegistrationService
         }
         return registration;
     }
+    
+     public static Registration getRegistrationByEmail(String token)
+    {
+        String email = "", firstName = "", lastName = "";
+        Registration registration = new Registration();
+
+        try
+        {
+            Connection conn = DBConnection.getConnection();
+           // String selectQuery = "SELECT * FROM Registration WHERE email= '"+token+"'";
+            
+            String query = "SELECT firstName, lastName, email, token FROM Registration WHERE email =?";
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, token);
+          //  PreparedStatement stmt = conn.prepareStatement(selectQuery);
+           // stmt.setString(1, token);
+           //Statement stmt = conn.createStatement();
+          
+            ResultSet rs = stmt.executeQuery();
+
+            rs.next();
+
+            email = rs.getString("email");
+            firstName = rs.getString("firstName");
+            lastName = rs.getString("lastName");
+            token = rs.getString("token");
+
+            registration.setEmail(email);
+            registration.setFirstName(firstName);
+            registration.setLastName(lastName);
+            registration.setToken(token);
+
+        } catch (Exception e)
+        {
+             System.out.println(e);
+        }
+        return registration;
+    }
+    
+    
 
     public static Registration setPassword(String token, String password)
     {
