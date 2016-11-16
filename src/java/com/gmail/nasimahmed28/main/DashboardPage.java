@@ -23,12 +23,14 @@ public class DashboardPage extends HttpServlet
 {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        SessionService.validateSession(request, response);
+       // SessionService.validateSession(request, response);
     }
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+      // processRequest(request, response);
+        //SessionService.validateSession(request, response);
        RequestDispatcher dispatcher = request.getRequestDispatcher("dashboard-page.jsp");
        dispatcher.forward(request, response);	
     }
